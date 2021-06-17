@@ -5,6 +5,7 @@ branding:
   color: 'blue'
 inputs:
   path:
+    required: false
     description: 'Path of package.json'
     default: "./"
 outputs:
