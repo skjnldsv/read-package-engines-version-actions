@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
       - name: Read node and npm versions from package.json
         uses: skjnldsv/read-package-engines-version-actions@v1
@@ -70,7 +70,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
       - name: Read node and npm versions from package.json
         uses: skjnldsv/read-package-engines-version-actions@v1
