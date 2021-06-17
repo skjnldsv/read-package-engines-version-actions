@@ -15,4 +15,4 @@ outputs:
     description: "Npm version from engines field in package.json"
 runs:
   using: 'node12'
-  main: 'lib/main.js'
+  main: 'dist/index.js'
