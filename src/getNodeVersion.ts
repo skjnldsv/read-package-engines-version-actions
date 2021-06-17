@@ -10,11 +10,21 @@ export const findPackageJson = (path: string): string => {
 };
 
 /**
- * Get version field within package.json
+ * Get engines node version field within package.json
  * @param path
  */
 export const getNodeVersion = (path: string): string => {
   const packageJson = findPackageJson(path);
 
   return JSON.parse(packageJson).engines.node;
+};
+
+/**
+ * Get engines npm version field within package.json
+ * @param path
+ */
+export const getNpmVersion = (path: string): string => {
+  const packageJson = findPackageJson(path);
+
+  return JSON.parse(packageJson).engines.npm;
 };
