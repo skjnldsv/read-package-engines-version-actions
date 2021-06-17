@@ -4,7 +4,7 @@
     "npm": "^6.0.0"
   },
   "name": "read-package-node-version-actions",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "private": true,
   "description": "Output node version numbers from package.json",
   "main": "lib/main.js",
