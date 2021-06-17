@@ -1,6 +1,6 @@
-# Read node version from engines field in package.json
+# Read node and npm versions from engines field in package.json
 
-Read your node version from `package.json`
+Read your node and npm version versions from `package.json`
 
 ## Example workflow
 
@@ -10,14 +10,15 @@ Read your node version from `package.json`
 {
   "name": "your-package",
   "engines": {
-    "node": "12.13.x"
+    "node": "12.13.x",
+    "node": "^6.1.3"
   }
 }
 ```
 
 `.github/workflow/test.yml`
 ```yml
-name: Get node version from package.json
+name: Get node and npm versions from package.json
 
 on: push
 
@@ -28,13 +29,17 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Read node from package.json
-        uses: culshaw/read-package-node-version-actions@v1
-        id: package-node-version
+      - name: Read node and npm versions from package.json
+        uses: skjnldsv/read-package-engines-version-actions@v1
+        id: package-engines-versions
 
       - name: Show node version number
-        run: echo "Version is ${{ steps.package-node-version.outputs.version }}"
+        run: echo "Node version is ${{ steps.package-engines-versions.outputs.nodeVersion }}"
         # Version is 12.13.x
+
+      - name: Show npm version number
+        run: echo "Npm version is ${{ steps.package-engines-versions.outputs.npmVersion }}"
+        # Version is ^6.1.3
 ```
 
 ## Inputs
@@ -49,13 +54,14 @@ Path of `package.json`, `./` by default.
 {
   "name": "your-package",
   "engines": {
-    "node": "12.13.x"
+    "node": "12.13.x",
+    "node": "^6.1.3"
   }
 }
 ```
 
 ```yml
-name: Get version from package.json
+name: Get node and npm versions from package.json
 
 on: push
 
@@ -66,15 +72,19 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Read node from package.json
-        uses: culshaw/read-package-node-version-actions@v1
+      - name: Read node and npm versions from package.json
+        uses: skjnldsv/read-package-engines-version-actions@v1
         with: 
           path: "./path/to/package.json"
-        id: package-node-version
+        id: package-engines-versions
 
-      - name: Show version number
-        run: echo "Version is ${{ steps.package-version.outputs.version }}"
+      - name: Show node version number
+        run: echo "Node version is ${{ steps.package-engines-versions.outputs.nodeVersion }}"
         # Version is 12.13.x
+
+      - name: Show npm version number
+        run: echo "Npm version is ${{ steps.package-engines-versions.outputs.npmVersion }}"
+        # Version is ^6.1.3
 ```
 
 # License
