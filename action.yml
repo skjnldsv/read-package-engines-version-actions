@@ -8,6 +8,12 @@ inputs:
     required: false
     description: 'Path of package.json'
     default: "./"
+  fallbackNode:
+    required: false
+    description: 'Fallback if engines npm version is not defined'
+  fallbackNpm:
+    required: false
+    description: 'Fallback if engines npm version is not defined'
 outputs:
   nodeVersion:
     description: "Node version from engines field in package.json"
