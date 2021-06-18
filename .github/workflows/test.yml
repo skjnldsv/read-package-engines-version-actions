@@ -4,37 +4,40 @@ on:
   push:
     branches:
       - master
-      - 'releases/*'
+      - "releases/*"
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - uses: actions/cache@v2
-      id: cache
-      with:
-        path: node_modules
-        key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-npm-
+      - uses: actions/cache@v2
+        id: cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
 
-    - name: Install dependencies
-      if: steps.cache.outputs.cache-hit != 'true'
-      run: npm ci
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
 
-    - name: Build
-      run: npm run package
+      - name: Build
+        run: npm run build
 
-    - name: Unit Test
-      run: npm test
+      - name: Unit Test
+        run: npm test
 
-    - name: Local action test
-      uses: ./
-      id: versions
+      - name: Package
+        run: npm run package
 
-    - name: Get versions
-      run: |
-        echo "Node version is  ${{ steps.versions.outputs.nodeVersion }}"
-        echo "Npm version is  ${{ steps.versions.outputs.npmVersion }}"
+      - name: Local action test
+        uses: ./
+        id: versions
+
+      - name: Get versions
+        run: |
+          echo "Node version is  ${{ steps.versions.outputs.nodeVersion }}"
+          echo "Npm version is  ${{ steps.versions.outputs.npmVersion }}"

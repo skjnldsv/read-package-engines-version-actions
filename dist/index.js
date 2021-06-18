@@ -20,20 +20,37 @@ exports.findPackageJson = (path) => {
     return fs_1.default.readFileSync(path_1.join(path, 'package.json')).toString();
 };
 /**
+ * Get engines versions field within package.json
+ * @param type
+ * @param path
+ * @param fallback
+ */
+const getEngineVersionFor = (type, path, fallback) => {
+    const packageJson = exports.findPackageJson(path);
+    const engines = JSON.parse(packageJson).engines;
+    if (engines && engines[type]) {
+        return engines[type];
+    }
+    if (fallback) {
+        return fallback;
+    }
+    return '';
+};
+/**
  * Get engines node version field within package.json
  * @param path
+ * @param fallback
  */
-exports.getNodeVersion = (path) => {
-    const packageJson = exports.findPackageJson(path);
-    return JSON.parse(packageJson).engines.node;
+exports.getNodeVersion = (path, fallback) => {
+    return getEngineVersionFor('node', path, fallback);
 };
 /**
  * Get engines npm version field within package.json
  * @param path
+ * @param fallback
  */
-exports.getNpmVersion = (path) => {
-    const packageJson = exports.findPackageJson(path);
-    return JSON.parse(packageJson).engines.npm;
+exports.getNpmVersion = (path, fallback) => {
+    return getEngineVersionFor('npm', path, fallback);
 };
 
 
@@ -65,9 +82,12 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const path = core.getInput('path');
+            const fallbackNode = core.getInput('fallbackNode');
+            const fallbackNpm = core.getInput('fallbackNpm');
             core.debug(`Load package.json at ${path}`);
-            const nodeVersion = getNodeVersion_1.getNodeVersion(path);
-            const npmVersion = getNodeVersion_1.getNpmVersion(path);
+            core.debug(`Fallback to ${fallbackNode} / ${fallbackNpm} if undefined`);
+            const nodeVersion = getNodeVersion_1.getNodeVersion(path, fallbackNode);
+            const npmVersion = getNodeVersion_1.getNpmVersion(path, fallbackNpm);
             core.debug(`nodeVersion: ${nodeVersion}, npmVersion: ${npmVersion}`);
             core.setOutput('nodeVersion', nodeVersion);
             core.setOutput('npmVersion', npmVersion);
