@@ -11,7 +11,7 @@ Read your node and npm version versions from `package.json`
   "name": "your-package",
   "engines": {
     "node": "12.13.x",
-    "node": "^6.1.3"
+    "npm": "^6.1.3"
   }
 }
 ```
@@ -55,7 +55,7 @@ Path of `package.json`, `./` by default.
   "name": "your-package",
   "engines": {
     "node": "12.13.x",
-    "node": "^6.1.3"
+    "npm": "^6.1.3"
   }
 }
 ```
