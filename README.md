@@ -1,6 +1,6 @@
 # Read node and npm versions from engines field in package.json
 
-Read your node and npm version versions from `package.json`
+Output node and npm version numbers from `package.json`
 
 ## Example workflow
 
