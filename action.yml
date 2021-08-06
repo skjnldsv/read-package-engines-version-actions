@@ -1,24 +1,28 @@
 name: 'Read package.json node and npm engines version'
 description: 'Output node and npm version number from package.json engines field'
+
 branding:
   icon: 'check-square'
   color: 'blue'
+
 inputs:
-  path:
+  - path:
     required: false
     description: 'Path of package.json'
     default: "./"
-  fallbackNode:
+  - fallbackNode:
     required: false
     description: 'Fallback if engines npm version is not defined'
-  fallbackNpm:
+  - fallbackNpm:
     required: false
     description: 'Fallback if engines npm version is not defined'
+
 outputs:
-  nodeVersion:
+  - nodeVersion:
     description: "Node version from engines field in package.json"
-  npmVersion:
+  - npmVersion:
     description: "Npm version from engines field in package.json"
+
 runs:
   using: 'node12'
   main: 'dist/index.js'
