@@ -9,7 +9,7 @@ inputs:
   path:
     required: false
     description: 'Path of package.json'
-    default: "./"
+    default: './'
   fallbackNode:
     required: false
     description: 'Fallback if engines npm version is not defined'
