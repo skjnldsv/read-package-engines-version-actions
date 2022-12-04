@@ -3,7 +3,7 @@ import fs from 'fs';
 import {
   findPackageJson,
   getNodeVersion,
-  getNpmVersion
+  getNpmVersion,
 } from '../getNodeVersion';
 
 const fixturePath = './src/__tests__/fixture';
