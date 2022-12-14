@@ -17,7 +17,7 @@ async function run() {
     core.setOutput('nodeVersion', nodeVersion);
     core.setOutput('npmVersion', npmVersion);
   } catch (error) {
-    core.setFailed(error.message);
+    core.setFailed((error as Error).message);
   }
 }
 
