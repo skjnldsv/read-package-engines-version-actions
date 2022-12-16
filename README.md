@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Read node and npm versions from package.json
-        uses: skjnldsv/read-package-engines-version-actions@v1
+        uses: skjnldsv/read-package-engines-version-actions@v2
         id: package-engines-versions
 
       - name: Show node version number
@@ -73,7 +73,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Read node and npm versions from package.json
-        uses: skjnldsv/read-package-engines-version-actions@v1
+        uses: skjnldsv/read-package-engines-version-actions@v2
         with: 
           path: "./path/to/package.json"
         id: package-engines-versions
@@ -112,7 +112,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Read node and npm versions from package.json
-        uses: skjnldsv/read-package-engines-version-actions@v1
+        uses: skjnldsv/read-package-engines-version-actions@v2
         with: 
           fallbackNode: '^14'
           fallbackNpm: '^6'
