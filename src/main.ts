@@ -16,6 +16,8 @@ async function run() {
     core.debug(`nodeVersion: ${nodeVersion}, npmVersion: ${npmVersion}`);
     core.setOutput('nodeVersion', nodeVersion);
     core.setOutput('npmVersion', npmVersion);
+    core.exportVariable('NODE_VERSION', nodeVersion);
+    core.exportVariable('NPM_VERSION', npmVersion);
   } catch (error) {
     core.setFailed((error as Error).message);
   }

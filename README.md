@@ -43,7 +43,6 @@ jobs:
 ```
 
 ## Inputs
-
 ### path
 
 Path of `package.json`, `./` by default.
@@ -125,6 +124,40 @@ jobs:
       - name: Show npm version number
         run: echo "Npm version is ${{ steps.package-engines-versions.outputs.npmVersion }}"
         # Version is ^6
+```
+
+## Share between jobs
+
+This action will also write two environment variables: `NODE_VERSION` and `NPM_VERSION`
+
+`.github/workflow/test.yml`
+```yml
+name: Get node and npm versions from package.json
+
+on: push
+
+jobs:
+  init:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Read node and npm versions from package.json
+        uses: skjnldsv/read-package-engines-version-actions@v2
+  
+  job2:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up node ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3.6.0
+        with:
+          cache: 'npm'
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Set up npm ${{ env.NPM_VERSION }}
+        run: npm i -g npm@"${{ env.NPM_VERSION }}"
 ```
 
 # License
