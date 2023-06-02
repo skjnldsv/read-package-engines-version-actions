@@ -1,4 +1,5 @@
-import fs from 'fs';
+import * as fs from 'fs'
+import * as os from 'os'
 import { getNodeVersion, getNpmVersion } from './getNodeVersion';
 import * as core from '@actions/core';
 
@@ -23,8 +24,13 @@ async function run() {
     }
 
     // Also write env variables
-    fs.appendFileSync(process.env.GITHUB_ENV, `NODE_VERSION=${nodeVersion}\n`);
-    fs.appendFileSync(process.env.GITHUB_ENV, `NPM_VERSION=${npmVersion}\n`);
+    const envVars = `NODE_VERSION=${nodeVersion}${os.EOL}NPM_VERSION=${npmVersion}${os.EOL}`;
+    fs.appendFileSync(process.env.GITHUB_ENV, envVars, {
+      encoding: 'utf8'
+    })
+
+    const env = fs.readFileSync(process.env.GITHUB_ENV, 'utf8');
+    core.debug('ENV ' + JSON.stringify(env));
   } catch (error) {
     core.setFailed((error as Error).message);
   }

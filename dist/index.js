@@ -97,11 +97,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const fs_1 = __importDefault(__nccwpck_require__(147));
+const fs = __importStar(__nccwpck_require__(147));
+const os = __importStar(__nccwpck_require__(37));
 const getNodeVersion_1 = __nccwpck_require__(353);
 const core = __importStar(__nccwpck_require__(186));
 function run() {
@@ -121,8 +119,12 @@ function run() {
                 throw new Error('GITHUB_ENV is not defined');
             }
             // Also write env variables
-            fs_1.default.appendFileSync(process.env.GITHUB_ENV, `NODE_VERSION=${nodeVersion}\n`);
-            fs_1.default.appendFileSync(process.env.GITHUB_ENV, `NPM_VERSION=${npmVersion}\n`);
+            const envVars = `NODE_VERSION=${nodeVersion}${os.EOL}NPM_VERSION=${npmVersion}${os.EOL}`;
+            fs.appendFileSync(process.env.GITHUB_ENV, envVars, {
+                encoding: 'utf8'
+            });
+            const env = fs.readFileSync(process.env.GITHUB_ENV, 'utf8');
+            core.debug('ENV ' + JSON.stringify(env));
         }
         catch (error) {
             core.setFailed(error.message);
