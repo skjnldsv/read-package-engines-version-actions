@@ -141,7 +141,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Read node and npm versions from package.json
         uses: skjnldsv/read-package-engines-version-actions@v2
@@ -151,7 +151,7 @@ jobs:
 
     steps:
       - name: Set up node ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3.6.0
+        uses: actions/setup-node@v3
         with:
           cache: 'npm'
           node-version: ${{ env.NODE_VERSION }}

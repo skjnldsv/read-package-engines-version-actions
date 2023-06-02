@@ -97,9 +97,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core = __importStar(__nccwpck_require__(186));
+const fs_1 = __importDefault(__nccwpck_require__(147));
 const getNodeVersion_1 = __nccwpck_require__(353);
+const core = __importStar(__nccwpck_require__(186));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -113,8 +117,12 @@ function run() {
             core.debug(`nodeVersion: ${nodeVersion}, npmVersion: ${npmVersion}`);
             core.setOutput('nodeVersion', nodeVersion);
             core.setOutput('npmVersion', npmVersion);
-            core.exportVariable('NODE_VERSION', nodeVersion);
-            core.exportVariable('NPM_VERSION', npmVersion);
+            if (process.env.GITHUB_ENV === undefined) {
+                throw new Error('GITHUB_ENV is not defined');
+            }
+            // Also write env variables
+            fs_1.default.appendFileSync(process.env.GITHUB_ENV, `NODE_VERSION=${nodeVersion}\n`);
+            fs_1.default.appendFileSync(process.env.GITHUB_ENV, `NPM_VERSION=${npmVersion}\n`);
         }
         catch (error) {
             core.setFailed(error.message);

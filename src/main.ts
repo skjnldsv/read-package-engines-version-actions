@@ -1,5 +1,6 @@
-import * as core from '@actions/core';
+import fs from 'fs';
 import { getNodeVersion, getNpmVersion } from './getNodeVersion';
+import * as core from '@actions/core';
 
 async function run() {
   try {
@@ -16,8 +17,14 @@ async function run() {
     core.debug(`nodeVersion: ${nodeVersion}, npmVersion: ${npmVersion}`);
     core.setOutput('nodeVersion', nodeVersion);
     core.setOutput('npmVersion', npmVersion);
-    core.exportVariable('NODE_VERSION', nodeVersion);
-    core.exportVariable('NPM_VERSION', npmVersion);
+
+    if (process.env.GITHUB_ENV === undefined) {
+      throw new Error('GITHUB_ENV is not defined');
+    }
+
+    // Also write env variables
+    fs.appendFileSync(process.env.GITHUB_ENV, `NODE_VERSION=${nodeVersion}\n`);
+    fs.appendFileSync(process.env.GITHUB_ENV, `NPM_VERSION=${npmVersion}\n`);
   } catch (error) {
     core.setFailed((error as Error).message);
   }
