@@ -18,7 +18,7 @@ export const findPackageJson = (path: string): string => {
 const getEngineVersionFor = (
   type: string,
   path: string,
-  fallback?: string
+  fallback?: string,
 ): string => {
   const packageJson = findPackageJson(path);
   const engines = JSON.parse(packageJson).engines;

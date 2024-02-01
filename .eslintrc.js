@@ -4,15 +4,16 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-    'prettier',
+    'plugin:prettier/recommended'
   ],
-  plugins: ['@typescript-eslint'],
+  plugins: [
+    '@typescript-eslint'
+  ],
   env: { node: true, es6: true, jest: true },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     sourceType: 'module',
-    project: './tsconfig.json',
+    project: './tsconfig.eslint.json',
     createDefaultProgram: true,
   },
 };
