@@ -1,6 +1,9 @@
+# https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions
 name: 'Read package.json node and npm engines version'
 description: 'Output node and npm version number from package.json engines field'
+author: skjnldsv
 
+# https://actions-cool.github.io/github-action-branding/
 branding:
   icon: 'check-square'
   color: 'blue'
@@ -24,5 +27,5 @@ outputs:
     description: "Npm version from engines field in package.json"
 
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
