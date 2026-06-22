@@ -1,5 +1,5 @@
 import * as core from '@actions/core';
-import { getNodeVersion, getNpmVersion } from './getNodeVersion';
+import { getNodeVersion, getNpmVersion } from './getNodeVersion.js';
 
 async function run() {
   try {

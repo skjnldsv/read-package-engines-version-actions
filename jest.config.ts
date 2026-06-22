@@ -1,4 +1,6 @@
-module.exports = {
+import {defineConfig} from 'jest';
+
+export default defineConfig({
   clearMocks: true,
   moduleFileExtensions: ['js', 'ts'],
   testEnvironment: 'node',
@@ -8,4 +10,4 @@ module.exports = {
     '^.+\\.ts$': 'ts-jest'
   },
   verbose: true
-};
+});
