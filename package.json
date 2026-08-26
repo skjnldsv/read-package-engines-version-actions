@@ -40,7 +40,7 @@
     "jest-circus": "^30.4.2",
     "lint-staged": "^17.0.5",
     "prettier": "^3.8.3",
-    "ts-jest": "^29.4.11",
+    "ts-jest": "^29.4.12",
     "typescript": "^5.9.3"
   },
   "engines": {
